@@ -1,9 +1,11 @@
-package com.example.calendarviewcustom
+package com.example.calendarviewcustom.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.example.calendarviewcustom.R
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.MonthView
 import kotlin.math.min
@@ -14,7 +16,7 @@ import kotlin.math.roundToInt
  * Created by huanghaibin on 2018/2/9.
  */
 
-class MonthView(context: Context) : MonthView(context) {
+class SingleMonthView(context: Context) : MonthView(context) {
     private var mRadius = 0
 
     /**
@@ -93,7 +95,7 @@ class MonthView(context: Context) : MonthView(context) {
 
     override fun onPreviewHook() {
         mCurrentDayPaint.textSize = mCurMonthLunarTextPaint.textSize
-        mRadius = min(mItemWidth, mItemHeight) / 11 * 3
+        mRadius = min(mItemWidth, mItemHeight) / 11 * 4
     }
 
     override fun onDrawSelected(canvas: Canvas, calendar: Calendar, x: Int, y: Int, hasScheme: Boolean): Boolean {
@@ -103,13 +105,28 @@ class MonthView(context: Context) : MonthView(context) {
         return true
     }
 
+    //日期下方繪製標點
     override fun onDrawScheme(canvas: Canvas?, calendar: Calendar?, x: Int, y: Int) {
-
+//        val isSelected = isSelected(calendar)
+//        if (isSelected) {
+//            mPointPaint.color = Color.WHITE
+//        } else {
+//            mPointPaint.color = Color.GRAY
+//        }
+//
+//        canvas!!.drawCircle(
+//            (x + mItemWidth / 2).toFloat(),
+//            (y + mItemHeight - 3 * mPadding).toFloat(),
+//            mPointRadius,
+//            mPointPaint
+//        )
     }
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onDrawText(canvas: Canvas, calendar: Calendar, x: Int, y: Int, hasScheme: Boolean, isSelected: Boolean) {
         val cx = x + mItemWidth / 2
+        val cy = y + mItemHeight / 2.8
         val top = y - mItemHeight / 6
         val isInRange = isInRange(calendar)
         val isEnable = !onCalendarIntercept(calendar)
@@ -119,6 +136,29 @@ class MonthView(context: Context) : MonthView(context) {
         mSchemeLunarTextPaint.color = -0x303031
         mOtherMonthTextPaint.color = -0x1e1e1f
         mOtherMonthLunarTextPaint.color = -0x1e1e1f
+
+
+        if (calendar.isCurrentDay && !isSelected){
+            canvas.drawCircle(cx.toFloat(),cy.toFloat(),mRadius.toFloat(),mCurrentDayPaint)
+        }
+
+
+        //週六週日的顏色
+        if (calendar.isWeekend && calendar.isCurrentMonth) {
+            mCurMonthTextPaint.color = Color.RED
+            mCurMonthLunarTextPaint.color = -0x303031
+            mSchemeTextPaint.color = -0xb76201
+            mSchemeLunarTextPaint.color = -0xb76201
+            mOtherMonthLunarTextPaint.color = -0xb76201
+            mOtherMonthTextPaint.color = -0xb76201
+        } else {
+            mCurMonthTextPaint.color = -0xcccccd
+            mCurMonthLunarTextPaint.color = -0x303031
+            mSchemeTextPaint.color = -0xcccccd
+            mSchemeLunarTextPaint.color = -0x303031
+            mOtherMonthTextPaint.color = -0x1e1e1f
+            mOtherMonthLunarTextPaint.color = -0x1e1e1f
+        }
 
         if (isSelected) {
             canvas.drawText(calendar.day.toString(), cx.toFloat(), mTextBaseLine + top,

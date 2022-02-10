@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.SingleMonthActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2196F3">
+
+            <TextView
+                android:id="@+id/tv_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="2022"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/tv_reset"
+                android:paddingEnd="10dp"
+                android:text="清除"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingEnd="10dp"
+                android:text="重設"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:src="@drawable/previous" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:text="2月"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:src="@drawable/next" />
+    </RelativeLayout>
+
+    <!--    month_view 月視圖，可客製化月曆想要呈現的樣式-->
+    <!--    current_day_text_colo 當前日期顏色-->
+    <!--    month_view_show_mode 月份顯示樣式-->
+    <!--    other_month_lunar_text_color 其他月份下方文字顯示顏色-->
+    <!--    other_month_text_color 其他月份日期顏色-->
+    <!--    select_mode 選擇模式-->
+    <!--    selected_text_color 選擇日期時 顏色-->
+    <!--    selected_theme_color 選擇日期時 區塊顏色-->
+    <!--    week_start_with 選擇從星期幾開始-->
+    <!--    week_text_color 星期字體顏色-->
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:calendar_padding="10dp"
+        app:current_day_text_color="#F44336"
+        app:month_view="com.example.calendarviewcustom.view.SingleMonthView"
+        app:week_view="com.example.calendarviewcustom.view.SingleWeekView"
+        app:month_view_show_mode="mode_only_current"
+        app:other_month_lunar_text_color="#4CAF50"
+        app:other_month_text_color="#9C27B0"
+        app:select_mode="single_mode"
+        app:selected_text_color="#FFF"
+        app:selected_theme_color="#2196F3"
+        app:week_start_with="sun"
+        app:week_text_color="#2196F3" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="回前頁" />
+
+</LinearLayout>

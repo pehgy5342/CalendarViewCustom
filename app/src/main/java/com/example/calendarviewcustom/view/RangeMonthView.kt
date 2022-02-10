@@ -1,4 +1,4 @@
-package com.example.calendarviewcustom
+package com.example.calendarviewcustom.view
 
 import android.content.Context
 import android.graphics.Canvas
