@@ -43,7 +43,6 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
         initData()
 
 //        calendarView.scrollToCalendar(calendarView.curYear,calendarView.curMonth,calendarView.curDay)
-        //標記當下日期
 
         val minYear = calendarView.curYear
         val minMonth = calendarView.curMonth
@@ -52,9 +51,11 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
         val maxMonth = 99
         val maxDay = 9
 
-
+        //標記當下日期
         calendarView.scrollToCurrent()
-        calendarView.setRange(minYear,minMonth,minDay,maxYear,maxMonth,maxYear)
+
+        //設定日期範圍
+        calendarView.setRange(minYear, minMonth, minDay, maxYear, maxMonth, maxDay)
 
         //監控已選中日期
         calendarView.setOnCalendarSelectListener(this)
@@ -190,7 +191,11 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
             scheme = "0"
         }
         if (isClick) {
-            Toast.makeText(this, "已選擇 ${calendar.year}年${calendar.month}月${calendar.day}日\n" + "金額：${scheme} 元", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "已選擇 ${calendar.year}年${calendar.month}月${calendar.day}日\n" + "金額：${scheme} 元",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -198,7 +203,7 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
     }
 
     override fun onCalendarIntercept(calendar: Calendar): Boolean {
-       return !get(calendar)
+        return !get(calendar)
     }
 
     override fun onCalendarInterceptClick(calendar: Calendar, isClick: Boolean) {
