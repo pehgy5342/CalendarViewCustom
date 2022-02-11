@@ -1,7 +1,6 @@
 package com.example.calendarviewcustom.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -45,7 +44,17 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
 
 //        calendarView.scrollToCalendar(calendarView.curYear,calendarView.curMonth,calendarView.curDay)
         //標記當下日期
+
+        val minYear = calendarView.curYear
+        val minMonth = calendarView.curMonth
+        val minDay = calendarView.curDay
+        val maxYear = 2999
+        val maxMonth = 99
+        val maxDay = 9
+
+
         calendarView.scrollToCurrent()
+        calendarView.setRange(minYear,minMonth,minDay,maxYear,maxMonth,maxYear)
 
         //監控已選中日期
         calendarView.setOnCalendarSelectListener(this)
@@ -57,7 +66,7 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
         calendarView.setOnViewChangeListener(this)
 
 //        tv_year.text = calendarView.curYear.toString()
-        tv_month.text = "${calendarView.curMonth}月 ${calendarView.curYear}年"
+        tv_month.text = "${minMonth}月 ${minYear}年"
 
 
         //上一個月
@@ -193,7 +202,6 @@ class SingleMonthActivity : AppCompatActivity(), CalendarView.OnMonthChangeListe
     }
 
     override fun onCalendarInterceptClick(calendar: Calendar, isClick: Boolean) {
-        Toast.makeText(this, calendar.toString() + "拦截不可点击", Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewChange(isMonthView: Boolean) {
